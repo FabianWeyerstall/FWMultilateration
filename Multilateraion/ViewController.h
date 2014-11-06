@@ -29,6 +29,7 @@
 @property (strong) NSMutableArray *mapArray;
 @property (strong) NSMutableArray *mapArrayKleinster;
 @property (strong)  NSMutableArray *scratchArray;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 
 @property CGPoint pointOfSmartphone;
 @property CGFloat beaconDistance0, beaconDistance1, beaconDistance2, beaconDistance3, beaconDistance4, beaconDistance5;

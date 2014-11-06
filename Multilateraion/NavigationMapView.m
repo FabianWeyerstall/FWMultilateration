@@ -49,17 +49,9 @@ bool hintergundfarbe = true;
 
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    [[UIColor blueColor] setFill];
+   
     
     
-    CGContextAddEllipseInRect(context, [self createRect:CGPointMake(5, 5)]); //1
-    CGContextAddEllipseInRect(context, [self createRect:CGPointMake(297.5, 5)]); //3
-    CGContextAddEllipseInRect(context, [self createRect:CGPointMake(150.0, 297.5)]); //5
-    
-    CGContextAddEllipseInRect(context, [self createRect:CGPointMake(5, 297.5)]); //4
-     CGContextAddEllipseInRect(context, [self createRect:CGPointMake(297.5, 297.5)]); //6
-    CGContextAddEllipseInRect(context, [self createRect:CGPointMake(150.0, 5.)]); //2
-    CGContextFillPath(context);
     
     
        ViewController *vc = (ViewController *) [[[UIApplication sharedApplication] keyWindow] rootViewController];
@@ -84,55 +76,55 @@ bool hintergundfarbe = true;
             if (vc.mapArray[i][j] > [NSNumber numberWithInt:(irgendwas*9)]) {
                 
                 [[UIColor redColor] setFill];
-                CGContextAddEllipseInRect(context, CGRectMake((i-150)*2, (j-150)*2, 2.0, 2.0));
+                CGContextAddEllipseInRect(context, CGRectMake((i-150)*2, (j-150)*2, 4.0, 4.0));
                 CGContextFillPath(context);
             }
             else if (vc.mapArray[i][j] > [NSNumber numberWithInt:(irgendwas*8)]){
                 
                 [[UIColor colorWithRed:255 green:127 blue:0 alpha:1.0] setFill];
-                CGContextAddEllipseInRect(context, CGRectMake((i-150)*2, (j-150)*2, 2.0, 2.0));
+                CGContextAddEllipseInRect(context, CGRectMake((i-150)*2, (j-150)*2, 4.0, 4.0));
                 CGContextFillPath(context);
             }
             else if (vc.mapArray[i][j] > [NSNumber numberWithInt:(irgendwas*7)]){
                 
                 [[UIColor colorWithRed:255 green:255 blue:0 alpha:1.0] setFill];
-                CGContextAddEllipseInRect(context, CGRectMake((i-150)*2, (j-150)*2, 2.0, 2.0));
+                CGContextAddEllipseInRect(context, CGRectMake((i-150)*2, (j-150)*2, 4.0, 4.0));
                 CGContextFillPath(context);
             }
             else if (vc.mapArray[i][j] > [NSNumber numberWithInt:(irgendwas*6)]){
                 
                 [[UIColor colorWithRed:127 green:255 blue:0 alpha:1.0] setFill];
-                CGContextAddEllipseInRect(context, CGRectMake((i-150)*2, (j-150)*2, 2.0, 2.0));
+                CGContextAddEllipseInRect(context, CGRectMake((i-150)*2, (j-150)*2, 4.0, 4.0));
                 CGContextFillPath(context);
             }else if (vc.mapArray[i][j] > [NSNumber numberWithInt:(irgendwas*5)]){
                 
                 [[UIColor colorWithRed:0 green:255 blue:0 alpha:1.0] setFill];
-                CGContextAddEllipseInRect(context, CGRectMake((i-150)*2, (j-150)*2, 2.0, 2.0));
+                CGContextAddEllipseInRect(context, CGRectMake((i-150)*2, (j-150)*2, 4.0, 4.0));
                 CGContextFillPath(context);
             } else if (vc.mapArray[i][j] > [NSNumber numberWithInt:(irgendwas*4)]){
                 
                 [[UIColor colorWithRed:0 green:255 blue:127 alpha:1.0] setFill];
-                CGContextAddEllipseInRect(context, CGRectMake((i-150)*2, (j-150)*2, 2.0, 2.0));
+                CGContextAddEllipseInRect(context, CGRectMake((i-150)*2, (j-150)*2, 4.0, 4.0));
                 CGContextFillPath(context);
             } else if (vc.mapArray[i][j] > [NSNumber numberWithInt:(irgendwas*4)]){
                 
                 [[UIColor colorWithRed:0 green:255 blue:255 alpha:1.0] setFill];
-                CGContextAddEllipseInRect(context, CGRectMake((i-150)*2, (j-150)*2, 2.0, 2.0));
+                CGContextAddEllipseInRect(context, CGRectMake((i-150)*2, (j-150)*2, 4.0, 4.0));
                 CGContextFillPath(context);
             } else if (vc.mapArray[i][j] > [NSNumber numberWithInt:(irgendwas*2)]){
                 
                 [[UIColor colorWithRed:0 green:0 blue:255 alpha:1.0] setFill];
-                CGContextAddEllipseInRect(context, CGRectMake((i-150)*2, (j-150)*2, 2.0, 2.0));
+                CGContextAddEllipseInRect(context, CGRectMake((i-150)*2, (j-150)*2, 4.0, 4.0));
                 CGContextFillPath(context);
             } else if (vc.mapArray[i][j] > [NSNumber numberWithInt:(irgendwas)]){
                 
                 [[UIColor colorWithRed:0 green:0 blue:255 alpha:1.0] setFill];
-                CGContextAddEllipseInRect(context, CGRectMake((i-150)*2, (j-150)*2, 2.0, 2.0));
+                CGContextAddEllipseInRect(context, CGRectMake((i-150)*2, (j-150)*2, 4.0, 4.0));
                 CGContextFillPath(context);
             } else {
                 
                 [[UIColor colorWithRed:0 green:0 blue:255 alpha:1.0] setFill];
-                CGContextAddEllipseInRect(context, CGRectMake((i-150)*2, (j-150)*2, 2.0, 2.0));
+                CGContextAddEllipseInRect(context, CGRectMake((i-150)*2, (j-150)*2, 4.0, 4.0));
                 CGContextFillPath(context);
             }
             
@@ -665,6 +657,16 @@ CGContextSetLineWidth(context, (((vc.beaconDistance0*96))*2));
     }
 
     CGContextFillPath(context);
+      [[UIColor whiteColor] setFill];
+    CGContextAddEllipseInRect(context, [self createRect:CGPointMake(5, 5)]); //1
+    CGContextAddEllipseInRect(context, [self createRect:CGPointMake(297.5, 5)]); //3
+    CGContextAddEllipseInRect(context, [self createRect:CGPointMake(150.0, 297.5)]); //5
+    
+    CGContextAddEllipseInRect(context, [self createRect:CGPointMake(5, 297.5)]); //4
+    CGContextAddEllipseInRect(context, [self createRect:CGPointMake(297.5, 297.5)]); //6
+    CGContextAddEllipseInRect(context, [self createRect:CGPointMake(150.0, 5.)]); //2
+    CGContextFillPath(context);
+
    
  [[UIColor blackColor] setFill];
     CGContextAddEllipseInRect(context, [self createRectPOS:CGPointMake((vc.pointOfSmartphone.x*100), (vc.pointOfSmartphone.y*100))]);

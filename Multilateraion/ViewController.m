@@ -16,7 +16,8 @@
 @implementation ViewController
 
 
-@synthesize locationManager, myBeaconRegion, scratchArray;
+@synthesize locationManager, myBeaconRegion, scratchArray,segmentedControl;
+
 
 int counter = 0;
 
@@ -82,9 +83,9 @@ int counter = 0;
         beacons.currentDistance = 212.0;
         [_beacons addObject:beacons];
         
-   
+        
     }
-  
+    
     return self;
 }
 
@@ -100,7 +101,7 @@ int counter = 0;
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     [self.locationManager requestAlwaysAuthorization];
-
+    
     NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"D1414625-7F9D-4944-A39F-E70FDF564C49"];
     self.myBeaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
                            
@@ -122,22 +123,22 @@ int counter = 0;
                                                                300
                                                                )];
     [self.view addSubview:_map];
- 
+    
     // Create Label
     UILabel *myLabel1 = [[UILabel alloc]initWithFrame:CGRectMake((self.view.frame.size.width - 290) / 2.0,
-                                                                (self.view.frame.size.height ) / 2.0,
-                                                                10,
-                                                                10
-)];
+                                                                 (self.view.frame.size.height ) / 2.0,
+                                                                 10,
+                                                                 10
+                                                                 )];
     [myLabel1 setText:@"1"];
     [[self view] addSubview:myLabel1];
-   
+    
     // Create Label
     UILabel *myLabel2 = [[UILabel alloc]initWithFrame:CGRectMake((self.view.frame.size.width - 185),
-                                                                (self.view.frame.size.height ) / 2.0,
-                                                                10,
-                                                                10
-                                                                )];
+                                                                 (self.view.frame.size.height ) / 2.0,
+                                                                 10,
+                                                                 10
+                                                                 )];
     [myLabel2 setText:@"2"];
     [[self view] addSubview:myLabel2];
     
@@ -149,7 +150,7 @@ int counter = 0;
                                                                  )];
     [myLabel3 setText:@"3"];
     [[self view] addSubview:myLabel3];
-
+    
     // Create Label
     UILabel *myLabel4 = [[UILabel alloc]initWithFrame:CGRectMake((self.view.frame.size.width - 290) / 2.0,
                                                                  (self.view.frame.size.height +575 )/2.0,
@@ -175,7 +176,7 @@ int counter = 0;
                                                                  )];
     [myLabel6 setText:@"6"];
     [[self view] addSubview:myLabel6];
-     counter++;
+    counter++;
     
 }
 
@@ -192,21 +193,21 @@ int counter = 0;
     NSMutableArray *availableBeacons = [[NSMutableArray alloc] init];
     for(CLBeacon *beacon in beacons)
     {
-      
+        
         
         NavigationBeacon *navBeacon = [self getTrackedBeaconFor:beacon];
         if(navBeacon){
             navBeacon.currentDistance =  beacon.accuracy;
-      
+            
             [availableBeacons addObject:navBeacon];
             // NSLog(@"%@", availableBeacons);
-         //   [self.view addSubview:_map];
+            //   [self.view addSubview:_map];
             //  NSLog(@"navBeacons %@", navBeacon);
-          
+            
             
         }
     }
-  
+    
     NSMutableArray *result1 = [self addBeacon:((NavigationBeacon *)_beacons[0]).mapPosition withRadius:((NavigationBeacon *)_beacons[0]).currentDistance andSizeResult:9];
     NSMutableArray *result3 = [self addBeacon:((NavigationBeacon *)_beacons[2]).mapPosition withRadius:((NavigationBeacon *)_beacons[2]).currentDistance andSizeResult:9];
     NSMutableArray *result5 = [self addBeacon:((NavigationBeacon *)_beacons[4]).mapPosition withRadius:((NavigationBeacon *)_beacons[4]).currentDistance andSizeResult:9];
@@ -214,25 +215,76 @@ int counter = 0;
     NSMutableArray *result2 = [self addBeacon:((NavigationBeacon *)_beacons[1]).mapPosition withRadius:((NavigationBeacon *)_beacons[1]).currentDistance andSizeResult:9];
     NSMutableArray *result4 = [self addBeacon:((NavigationBeacon *)_beacons[3]).mapPosition withRadius:((NavigationBeacon *)_beacons[3]).currentDistance andSizeResult:9];
     NSMutableArray *result6 = [self addBeacon:((NavigationBeacon *)_beacons[5]).mapPosition withRadius:((NavigationBeacon *)_beacons[5]).currentDistance andSizeResult:9];
-
-    
-//    NSMutableArray *result1 = [self addBeacon:CGPointMake(0, 0) withRadius:2.12 andSizeResult:9];
-//    NSMutableArray *result2 = [self addBeacon:CGPointMake(1.5, 0) withRadius:1.5 andSizeResult:9];
-//    NSMutableArray *result3 = [self addBeacon:CGPointMake(3.0, 0) withRadius:2.12 andSizeResult:9];
-//    
-//    NSMutableArray *result4 = [self addBeacon:CGPointMake(0, 3.0) withRadius:2.21 andSizeResult:9];
-//    NSMutableArray *result5 = [self addBeacon:CGPointMake(1.5, 3.0) withRadius:1.50 andSizeResult:9];
-//    NSMutableArray *result6 = [self addBeacon:CGPointMake(3.0, 3.0) withRadius:2.12 andSizeResult:9];
-    
-    NSMutableArray *resultAll12 = [self addNewBeaconArray:result1 withNewBeaconArray:result3 andSizeResult:9];
-    NSMutableArray *resultAll12p3 = [self addNewBeaconArray:resultAll12 withNewBeaconArray:result5 andSizeResult:9];
     
     
-    NSMutableArray *resultAll12p3p4 = [self addNewBeaconArray:resultAll12p3 withNewBeaconArray:result2 andSizeResult:9];
-    NSMutableArray *resultAll12p3p4p5 = [self addNewBeaconArray:resultAll12p3p4 withNewBeaconArray:result4 andSizeResult:9];
-    NSMutableArray *resultAll12p3p4p5p6 = [self addNewBeaconArray:resultAll12p3p4p5 withNewBeaconArray:result6 andSizeResult:9];
+    //    NSMutableArray *result1 = [self addBeacon:CGPointMake(0, 0) withRadius:2.12 andSizeResult:9];
+    //    NSMutableArray *result2 = [self addBeacon:CGPointMake(1.5, 0) withRadius:1.5 andSizeResult:9];
+    //    NSMutableArray *result3 = [self addBeacon:CGPointMake(3.0, 0) withRadius:2.12 andSizeResult:9];
+    //
+    //    NSMutableArray *result4 = [self addBeacon:CGPointMake(0, 3.0) withRadius:2.21 andSizeResult:9];
+    //    NSMutableArray *result5 = [self addBeacon:CGPointMake(1.5, 3.0) withRadius:1.50 andSizeResult:9];
+    //    NSMutableArray *result6 = [self addBeacon:CGPointMake(3.0, 3.0) withRadius:2.12 andSizeResult:9];
+    NSMutableArray *resultAllEnd = nil;
     
-    NSMutableArray *result = resultAll12p3p4p5p6;
+    if(segmentedControl.selectedSegmentIndex == 0) {
+        NSMutableArray *resultAll12 = [self addNewBeaconArray:result1 withNewBeaconArray:result3 andSizeResult:9];
+        resultAllEnd = [self addNewBeaconArray:resultAll12 withNewBeaconArray:result5 andSizeResult:9];
+        _beaconDistance0 = ((NavigationBeacon *)_beacons[0]).currentDistance;
+         _beaconDistance1= ((NavigationBeacon *)_beacons[1]).currentDistance = 0.0;
+        _beaconDistance2= ((NavigationBeacon *)_beacons[2]).currentDistance;
+        _beaconDistance3= ((NavigationBeacon *)_beacons[3]).currentDistance = 0.0;
+        _beaconDistance4= ((NavigationBeacon *)_beacons[4]).currentDistance;
+         _beaconDistance5= ((NavigationBeacon *)_beacons[5]).currentDistance = 0.0;
+    
+    } else if(segmentedControl.selectedSegmentIndex == 1) {
+        NSMutableArray *resultAll12 = [self addNewBeaconArray:result1 withNewBeaconArray:result3 andSizeResult:9];
+        NSMutableArray *resultAll12p3 = [self addNewBeaconArray:resultAll12 withNewBeaconArray:result5 andSizeResult:9];
+        resultAllEnd = [self addNewBeaconArray:resultAll12p3 withNewBeaconArray:result2 andSizeResult:9];
+        _beaconDistance0 = ((NavigationBeacon *)_beacons[0]).currentDistance;
+        _beaconDistance1= ((NavigationBeacon *)_beacons[1]).currentDistance;
+        _beaconDistance2= ((NavigationBeacon *)_beacons[2]).currentDistance;
+        _beaconDistance3= ((NavigationBeacon *)_beacons[3]).currentDistance = 0.0;
+        _beaconDistance4= ((NavigationBeacon *)_beacons[4]).currentDistance;
+        _beaconDistance5= ((NavigationBeacon *)_beacons[5]).currentDistance = 0.0;
+    } else if(segmentedControl.selectedSegmentIndex == 2) {
+        NSMutableArray *resultAll12 = [self addNewBeaconArray:result1 withNewBeaconArray:result3 andSizeResult:9];
+        NSMutableArray *resultAll12p3 = [self addNewBeaconArray:resultAll12 withNewBeaconArray:result5 andSizeResult:9];
+        NSMutableArray *resultAll12p3p4 = [self addNewBeaconArray:resultAll12p3 withNewBeaconArray:result2 andSizeResult:9];
+       resultAllEnd = [self addNewBeaconArray:resultAll12p3p4 withNewBeaconArray:result4 andSizeResult:9];
+        _beaconDistance0 = ((NavigationBeacon *)_beacons[0]).currentDistance;
+        _beaconDistance1= ((NavigationBeacon *)_beacons[1]).currentDistance;
+        _beaconDistance2= ((NavigationBeacon *)_beacons[2]).currentDistance;
+        _beaconDistance3= ((NavigationBeacon *)_beacons[3]).currentDistance;
+        _beaconDistance4= ((NavigationBeacon *)_beacons[4]).currentDistance;
+        _beaconDistance5= ((NavigationBeacon *)_beacons[5]).currentDistance = 0.0;
+    } else if(segmentedControl.selectedSegmentIndex == 3) {
+        NSMutableArray *resultAll12 = [self addNewBeaconArray:result1 withNewBeaconArray:result3 andSizeResult:9];
+        NSMutableArray *resultAll12p3 = [self addNewBeaconArray:resultAll12 withNewBeaconArray:result5 andSizeResult:9];
+        NSMutableArray *resultAll12p3p4 = [self addNewBeaconArray:resultAll12p3 withNewBeaconArray:result2 andSizeResult:9];
+        NSMutableArray *resultAll12p3p4p5 = [self addNewBeaconArray:resultAll12p3p4 withNewBeaconArray:result4 andSizeResult:9];
+        resultAllEnd = [self addNewBeaconArray:resultAll12p3p4p5 withNewBeaconArray:result6 andSizeResult:9];
+        _beaconDistance0 = ((NavigationBeacon *)_beacons[0]).currentDistance;
+        _beaconDistance1= ((NavigationBeacon *)_beacons[1]).currentDistance;
+        _beaconDistance2= ((NavigationBeacon *)_beacons[2]).currentDistance;
+        _beaconDistance3= ((NavigationBeacon *)_beacons[3]).currentDistance;
+        _beaconDistance4= ((NavigationBeacon *)_beacons[4]).currentDistance;
+        _beaconDistance5= ((NavigationBeacon *)_beacons[5]).currentDistance;
+    } else{
+        NSMutableArray *resultAll12 = [self addNewBeaconArray:result1 withNewBeaconArray:result3 andSizeResult:9];
+        NSMutableArray *resultAll12p3 = [self addNewBeaconArray:resultAll12 withNewBeaconArray:result5 andSizeResult:9];
+        NSMutableArray *resultAll12p3p4 = [self addNewBeaconArray:resultAll12p3 withNewBeaconArray:result2 andSizeResult:9];
+        NSMutableArray *resultAll12p3p4p5 = [self addNewBeaconArray:resultAll12p3p4 withNewBeaconArray:result4 andSizeResult:9];
+        resultAllEnd = [self addNewBeaconArray:resultAll12p3p4p5 withNewBeaconArray:result6 andSizeResult:9];
+        _beaconDistance0 = ((NavigationBeacon *)_beacons[0]).currentDistance;
+        _beaconDistance1= ((NavigationBeacon *)_beacons[1]).currentDistance;
+        _beaconDistance2= ((NavigationBeacon *)_beacons[2]).currentDistance;
+        _beaconDistance3= ((NavigationBeacon *)_beacons[3]).currentDistance;
+        _beaconDistance4= ((NavigationBeacon *)_beacons[4]).currentDistance;
+        _beaconDistance5= ((NavigationBeacon *)_beacons[5]).currentDistance;
+    }
+    
+    
+    NSMutableArray *result = resultAllEnd;
     
     result = [self glaetten:result mit:9];
     result = [self glaetten:result mit:9];
@@ -249,7 +301,7 @@ int counter = 0;
                 scratchI = i;
                 scratchJ = j;
                 scratchArray = result[i][j];
-                 counter++;
+                counter++;
             }
             
         }
@@ -258,17 +310,17 @@ int counter = 0;
     double resultX = scratchI/50.0-3.0;
     double resultY = scratchJ/50.0-3.0;
     
- //   NSLog(@"Bewertung: %@  i:%d, j:%d, x:%f, y:%f", scratchArray, scratchI, scratchJ, resultX, resultY);
+    //   NSLog(@"Bewertung: %@  i:%d, j:%d, x:%f, y:%f", scratchArray, scratchI, scratchJ, resultX, resultY);
     
     _positionLabel.text = [NSString stringWithFormat:@"X: %.2f, Y: %.2f", resultX, resultY];
     _bewertungsLabel.text = [NSString stringWithFormat:@"%@", scratchArray];
-    _iLabel.text =[NSString stringWithFormat:@"%d", scratchI];
-    _jLabel.text =[NSString stringWithFormat:@"%d", scratchJ];
+    _iLabel.text =[NSString stringWithFormat:@"I: %d, J: %d", scratchI, scratchJ];
+    // _jLabel.text =[NSString stringWithFormat:@"%d", scratchJ];
     _labelDistanzen.text = [NSString stringWithFormat:@"1: %.2f, 2: %.2f, 3: %.2f,\n4: %.2f, 5: %.2f, 6: %.2f,",  ((NavigationBeacon *)_beacons[0]).currentDistance, ((NavigationBeacon *)_beacons[1]).currentDistance, ((NavigationBeacon *)_beacons[2]).currentDistance, ((NavigationBeacon *)_beacons[3]).currentDistance, ((NavigationBeacon *)_beacons[4]).currentDistance, ((NavigationBeacon *)_beacons[5]).currentDistance];
-  
-//    [_map drawPosition:resultX and:resultY];
+    
+    //    [_map drawPosition:resultX and:resultY];
     _pointOfSmartphone = CGPointMake(resultX, resultY);
-   
+    
     
     _beaconDistance0 = ((NavigationBeacon *)_beacons[0]).currentDistance;
     _beaconDistance1= ((NavigationBeacon *)_beacons[1]).currentDistance;
@@ -276,13 +328,13 @@ int counter = 0;
     _beaconDistance3= ((NavigationBeacon *)_beacons[3]).currentDistance;
     _beaconDistance4= ((NavigationBeacon *)_beacons[4]).currentDistance;
     _beaconDistance5= ((NavigationBeacon *)_beacons[5]).currentDistance;
-     [_map setNeedsDisplay];
-     counter++;
+    [_map setNeedsDisplay];
+    counter++;
     //NSLog(@"Counter: %i", counter);
-
- 
- 
-    }
+    
+    
+    
+}
 
 - (NavigationBeacon*) getTrackedBeaconFor:(CLBeacon *) beacon
 {
@@ -318,7 +370,7 @@ int counter = 0;
     
     for (int i=0; i<sizeResultScratch; i++) {
         for (int j=0; j<sizeResultScratch; j++) {
-             counter++;
+            counter++;
             double x = i/raster;
             double y = j/raster;
             
@@ -366,7 +418,7 @@ int counter = 0;
     NSMutableArray *newArray = [NSMutableArray mutableNullArraysWithVisualFormat:[NSString stringWithFormat:@"[%d][%d]", sizeResultScratch, sizeResultScratch]];
     for (int i=0; i<sizeResultScratch; i++) {
         for (int j=0; j<sizeResultScratch; j++) {
-             counter++;
+            counter++;
             newArray[i][j] = [NSNumber numberWithInt:([old[i][j] intValue]  + [new[i][j] intValue])] ;
         }
     }
@@ -382,7 +434,7 @@ int counter = 0;
     
     for (int i=0; i<sizeResultScratch; i++) {
         for (int j=0; j<sizeResultScratch; j++) {
-             counter++;
+            counter++;
             if ((i < 1 && j< 1)) {
                 newArray[i][j] = result[i][j];
                 //   NSLog(@"i:%d J:%d ", i, j);
