@@ -1,9 +1,9 @@
 //
 //  NavigationBeacon.m
-//  BeaconNav
+//  Multilateraion
 //
-//  Created by Michael Krümmling on 18.03.14.
-//  Copyright (c) 2014 Michael Krümmling. All rights reserved.
+//  Created by Fabian Weyerstall on 02.11.14.
+//  Copyright (c) 2014 Fabian Weyerstall. All rights reserved.
 //
 
 #import "NavigationBeacon.h"

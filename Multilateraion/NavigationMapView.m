@@ -1,9 +1,9 @@
 //
 //  NavigationMapView.m
-//  BeaconNav
+//  Multilateraion
 //
-//  Created by Michael Krümmling on 18.03.14.
-//  Copyright (c) 2014 Michael Krümmling. All rights reserved.
+//  Created by Fabian Weyerstall on 02.11.14.
+//  Copyright (c) 2014 Fabian Weyerstall. All rights reserved.
 //
 
 #import "NavigationMapView.h"
@@ -56,12 +56,12 @@ bool hintergundfarbe = true;
     
        ViewController *vc = (ViewController *) [[[UIApplication sharedApplication] keyWindow] rootViewController];
     if(vc.switchOutlet.isOn) {
-        hintergundfarbe = true;
-        schein = false;
-    }
-    else {
         hintergundfarbe = false;
         schein = true;
+    }
+    else {
+        hintergundfarbe = true;
+        schein = false;
     }
         
     
